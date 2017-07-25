@@ -19,7 +19,7 @@ app.post('/SalaryPaymentService', function(req, res){
   var url = baseUrl + 'SalaryPaymentService?WSDL';
   var args =  req.body.args || {};
   var options = req.body.options || {};
-  var options = {
+  var reqOptions = {
     method: 'POST',
     url: 'https://testapi.tigo.com.hn/mfsapi/SalaryPaymentService',
     qs: {
@@ -40,7 +40,7 @@ app.post('/SalaryPaymentService', function(req, res){
                        key => {
                          return `<v3:${key}>${options[key]}</v3:${key}>`
                        }
-                     )
+                     ).join(' ')
                    }
                 </v3:GeneralConsumerInformation>
              </v3:RequestHeader>
@@ -50,7 +50,7 @@ app.post('/SalaryPaymentService', function(req, res){
                     key => {
                       return `<v1:${key}>${args[key]}</v1:${key}>`
                     }
-                  )
+                  ).join(' ')
                 }
              </v1:requestBody>
           </v1:SalaryPaymentRequest>
@@ -58,10 +58,11 @@ app.post('/SalaryPaymentService', function(req, res){
     </soapenv:Envelope>`
   };
 
-  request(options, function(error, response, body) {
+  console.log(reqOptions.body);
+  request(reqOptions, function(error, response, body) {
     if (error) throw new Error(error);
 
-    console.log(body);
+    res.send(body);
   });
 });
 
