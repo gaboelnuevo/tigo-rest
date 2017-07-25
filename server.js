@@ -21,7 +21,7 @@ app.post('/SalaryPaymentService', function(req, res){
   var options = req.body.options || {};
   var reqOptions = {
     method: 'POST',
-    url: 'https://testapi.tigo.com.hn/mfsapi/SalaryPaymentService',
+    url: url,
     qs: {
       WSDL: ''
     },
@@ -52,6 +52,14 @@ app.post('/SalaryPaymentService', function(req, res){
                     }
                   ).join('\n')
                 }
+                <!--Optional:-->
+                <v1:additionalParameters>
+                  <!--Zero or more repetitions:-->
+                  <!--<v2:ParameterType>
+                      <v2:parameterName>?</v2:parameterName>
+                      <v2:parameterValue>?</v2:parameterValue>
+                  </v2:ParameterType>-->
+                </v1:additionalParameters>
              </v1:requestBody>
           </v1:SalaryPaymentRequest>
        </soapenv:Body>
