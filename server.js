@@ -40,7 +40,7 @@ app.post('/SalaryPaymentService', function(req, res){
                        key => {
                          return `<v3:${key}>${options[key]}</v3:${key}>`
                        }
-                     ).join(' ')
+                     ).join('\n')
                    }
                 </v3:GeneralConsumerInformation>
              </v3:RequestHeader>
@@ -50,7 +50,7 @@ app.post('/SalaryPaymentService', function(req, res){
                     key => {
                       return `<v1:${key}>${args[key]}</v1:${key}>`
                     }
-                  ).join(' ')
+                  ).join('\n')
                 }
              </v1:requestBody>
           </v1:SalaryPaymentRequest>
