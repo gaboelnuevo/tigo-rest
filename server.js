@@ -15,6 +15,25 @@ var request = require("request");
 
 var baseUrl = 'https://testapi.tigo.com.hn/mfsapi/';
 
+
+/* {
+	"options": {
+		"country": "HND",
+		"correlationID": "?",
+		"consumerID": "?",
+		"transactionID": "?"
+	}, 
+	"args": {
+		"masterAccount": "96531915",
+		"pin": "2017",
+		"account": "96531915",
+		"amount": "10",
+		"terminalID": "1000",
+		"businessID": "PlaniPagos-01",
+		"businessReference": "10101010"
+	}
+} */
+
 app.post('/SalaryPaymentService', function(req, res){
   var url = baseUrl + 'SalaryPaymentService?WSDL';
   var args =  req.body.args || {};
