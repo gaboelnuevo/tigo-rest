@@ -29,7 +29,7 @@ var baseUrl = 'https://testapi.tigo.com.hn/mfsapi/';
 		"account": "96531915",
 		"amount": "10",
 		"terminalID": "1000",
-		"businessID": "PlaniPagos-01",
+		"businessID": "PxxxPxxxxx-01",
 		"businessReference": "10101010"
 	}
 } */
