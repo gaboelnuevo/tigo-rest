@@ -37,7 +37,14 @@ var baseUrl = 'https://testapi.tigo.com.hn/mfsapi/';
 app.post('/SalaryPaymentService', function(req, res){
   var url = baseUrl + 'SalaryPaymentService?WSDL';
   var args =  req.body.args || {};
-  var options = req.body.options || {};
+  var options = {
+    correlationID: "",
+    consumerID: "",
+    transactionID: "",
+  };
+
+  Object.assign(options, (req.body.options || {}));
+  
   var reqOptions = {
     method: 'POST',
     url: url,
@@ -85,7 +92,6 @@ app.post('/SalaryPaymentService', function(req, res){
     </soapenv:Envelope>`
   };
 
-  console.log(reqOptions.body);
   request(reqOptions, function(error, response, body) {
     if (error) throw new Error(error);
 
