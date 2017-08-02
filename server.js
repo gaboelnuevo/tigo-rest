@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 var request = require("request");
+var xpath = require('xpath')
+  , dom = require('xmldom').DOMParser
+var parser = require('xml2json');
 
 var baseUrl = 'https://testapi.tigo.com.hn/mfsapi/';
 
@@ -95,8 +98,18 @@ app.post('/SalaryPaymentService', function(req, res){
   request(reqOptions, function(error, response, body) {
     if (error) throw new Error(error);
 
-    res.send(body);
+    // remove namespace prefixs
+    body = body ? body.replace(/<(\/?)\w+:(\w+\/?)(.*?(?=>))>/g, "<$1$2>") : '';
+    var doc = new dom().parseFromString(body);
+    var nodes = xpath.select("/Envelope/Body", doc);
+    var _response = parser.toJson(nodes.toString(), { object: true });
+    var ok = _response.Body && !_response.Body.Fault;
+    console.log(JSON.stringify(_response));
+
+    res.status(ok ? 200: 500).send(body);
   });
+
+  //request(reqOptions).pipe(res);
 });
 
 app.listen(PORT, function (){
